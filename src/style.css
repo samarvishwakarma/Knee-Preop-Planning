@@ -11,6 +11,7 @@ body
     height: 100vh;
     font-family: 'Gotham';
     background: rgb(0, 0, 0);
+    max-width:100%;
 }
 
 body
@@ -26,6 +27,7 @@ body
     outline: none;
     mix-blend-mode: screen;
     z-index: 0;
+    max-width:100%;
 }
 
 .navbar
@@ -61,13 +63,14 @@ body
 
 .container
 {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     display: grid;
     place-items: center;
     backdrop-filter: blur(10px); 
     background-image: url(/static/bglight_Copy.png);
     background-size: cover;
+    background-position: center;
 }
 
 .link {
@@ -102,7 +105,7 @@ body
 
 h1
 {
-    font-size: 8rem;
+    font-size: 8vw;
     text-transform: uppercase;
     color: black;
     mix-blend-mode:overlay ;
@@ -110,7 +113,7 @@ h1
 }
 
 button{
-    font-size: 8rem;
+    font-size: 8vw;
     font-family: 'Gotham';
     color: black;
     mix-blend-mode:overlay;
@@ -138,7 +141,6 @@ button{
 .link a
 {
     z-index: 100;
-    font-size: 1rem;
     text-transform: uppercase;
     color: rgb(255, 255, 255);
     mix-blend-mode: overlay;
@@ -147,16 +149,17 @@ button{
 
 h2
 {
-    font-size: 5rem;
+    font-size: 5vw;
     text-transform: uppercase;
     color: white;
 }
 
 p
 {
-    font-size: 3rem;
+    font-size: 100%;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.507);
+
 }
 
 /* section
