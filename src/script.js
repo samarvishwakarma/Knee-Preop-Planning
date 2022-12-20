@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import { SphereGeometry, TextureLoader } from 'three'
 import { GLTFLoader, GLTFParser, GLTFReference } from 'three/examples/jsm/loaders/GLTFLoader';
-import { RGBELoader } from './RGBEloader'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 // Debug
 // const gui = new dat.GUI()
