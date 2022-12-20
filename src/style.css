@@ -1,0 +1,165 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+html,
+body
+{
+    height: 100vh;
+    font-family: 'Gotham';
+    background: rgb(0, 0, 0);
+}
+
+body
+{
+    overflow-x: hidden;
+}
+
+.webgl
+{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    outline: none;
+    mix-blend-mode: screen;
+    z-index: 0;
+}
+
+.navbar
+{
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    background: #e7e7e71a;
+     backdrop-filter: blur(10px);
+}
+
+.nav
+{
+    padding: 5px;
+}
+
+.nav p
+{
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+}
+
+.nav-dark {
+    background: #40404013;
+}
+
+.nav-dark p{
+    color: rgb(61, 61, 61);
+    border: 1px solid rgb(61, 61, 61);
+}
+
+.container
+{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(10px); 
+    background-image: url(/static/bglight_Copy.png);
+    background-size: cover;
+}
+
+.link {
+    mix-blend-mode: overlay;
+    animation: bounce 0.5s;
+    animation-direction: alternate;
+    animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
+    animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+    from {
+        transform: translate3d(0, -1vh, 0);
+    }
+    to {
+        transform: translate3d(0, 1vh, 0);
+    }
+}
+
+.dark-mode {
+    background-image: url(/static/bgdark_Copy.png);
+    color: white;
+}
+
+.container1
+{
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 1);
+}
+
+h1
+{
+    font-size: 8rem;
+    text-transform: uppercase;
+    color: black;
+    mix-blend-mode:overlay ;
+    border: 1px solid black;
+}
+
+button{
+    font-size: 8rem;
+    font-family: 'Gotham';
+    color: black;
+    mix-blend-mode:overlay;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.container button{
+    animation: opacity 3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+@keyframes opacity {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.link a
+{
+    z-index: 100;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    mix-blend-mode: overlay;
+    text-decoration: none;
+}
+
+h2
+{
+    font-size: 5rem;
+    text-transform: uppercase;
+    color: white;
+}
+
+p
+{
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.507);
+}
+
+/* section
+{
+    height:100vh;
+} */
