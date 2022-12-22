@@ -6,8 +6,10 @@ import { SphereGeometry, TextureLoader } from 'three'
 import { GLTFLoader, GLTFParser, GLTFReference } from 'three/examples/jsm/loaders/GLTFLoader';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
+
 // Debug
-// const gui = new dat.GUI()
+const gui = new dat.GUI()
+gui.domElement.id = 'gui';
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -25,6 +27,19 @@ else ;
 
 if(! localStorage.getItem("dark") ) {
     localStorage.setItem("dark", 1);
+}
+else ;
+
+if(! localStorage.getItem("carcolor_r") ) {
+    localStorage.setItem("carcolor_r", 0.35054680705070496);
+}
+else ;
+if(! localStorage.getItem("carcolor_g") ) {
+    localStorage.setItem("carcolor_g", 0.00038921806844882667);
+}
+else ;
+if(! localStorage.getItem("carcolor_b") ) {
+    localStorage.setItem("carcolor_b", 0);
 }
 else ;
 
@@ -60,6 +75,56 @@ loader.load('/mercedes.gltf',(gltf)=>{
     //         // key.visible = false;
     //         break;}       
     // }
+    //tire changing function
+    domEvents.addEventListener(model.children[0], 'click', tirechange)
+    domEvents.addEventListener(model.children[0], 'mouseover', tirechange2)
+    domEvents.addEventListener(model.children[0], 'mouseout', tirechange3)
+    function tirechange() {
+        index = (index)%4 + 1;
+        localStorage.setItem("tireNumber",index);
+        planemap = textureLoader.load(`Texture/${index}.png`);
+        tiretext.map = planemap;
+        tiretext.bumpMap = planemap;
+    }
+    function tirechange2() {
+        model.children[0].material.emissive.r = 0.1;
+        model.children[0].material.emissive.g = 0.1;
+        model.children[0].material.emissiveIntensity = 0.5;
+    }
+    function tirechange3() {
+        model.children[0].material.emissive.r = 0;
+        model.children[0].material.emissive.g = 0;
+    }
+
+    //car color
+    model.children[1].children[0].material.color.r = localStorage.getItem("carcolor_r");
+    model.children[1].children[0].material.color.g = localStorage.getItem("carcolor_g");
+    model.children[1].children[0].material.color.b = localStorage.getItem("carcolor_b");
+    
+    const carcolor = {
+        Color : 0x00000
+    }
+    console.log(model.children[1].children[0].material)
+    gui.addColor(carcolor,'Color')
+            .onChange(() => {
+                model.children[1].children[0].material.color.set(carcolor.Color)
+                localStorage.setItem("carcolor_r",model.children[1].children[0].material.color.r)
+                localStorage.setItem("carcolor_g",model.children[1].children[0].material.color.g)
+                localStorage.setItem("carcolor_b",model.children[1].children[0].material.color.b)
+            })
+    
+    var obj = { Restore:function(){ 
+        localStorage.setItem("carcolor_r", 0.35054680705070496);
+        localStorage.setItem("carcolor_g", 0.00038921806844882667);
+        localStorage.setItem("carcolor_b", 0);
+        localStorage.setItem("tireNumber", 1);
+        window.location.reload();
+     }};
+    gui.add(obj,'Restore');
+    // gui.add("button", "click me")
+    //         .onClick(() => {
+
+    //         })
 })
 
 loader.load('/plane.gltf',(gltf)=>{
@@ -93,14 +158,6 @@ planemap.onload = () => { tiretext.needsUpdate = true };
 
 // JAVASCRIPT
 var el = document.getElementsByClassName('btn');
-console.log(el);
-console.log(el[0]);
-
-
-if(localStorage.getItem("dark")==1){
-
-}
-else;
 
 el[0].addEventListener( 'click', myFunction);
 
@@ -164,7 +221,6 @@ function onKeyDown(e) {
             planemap = textureLoader.load(`Texture/${index}.png`);
             tiretext.map = planemap;
             tiretext.bumpMap = planemap;
-            model.children[0].material = tiretext;
             break;
         case 87:  //w
             index = (index)%4 + 1;
@@ -172,7 +228,6 @@ function onKeyDown(e) {
             planemap = textureLoader.load(`Texture/${index}.png`);
             tiretext.map = planemap;
             tiretext.bumpMap = planemap;
-            model.children[0].material = tiretext;
             break;
         default:
             break;
@@ -195,6 +250,7 @@ if(localStorage.getItem("dark")==1)
         pointLight.intensity = 2;
         hdri(forest);
     }
+
 
 /** 
  * Sizes
@@ -273,6 +329,15 @@ renderer.outputEncoding = THREE.sRGBEncoding;
  }
 
  renderer.p
+
+ //Event
+ var initializeDomEvents = require("threex-domevents");
+ var THREEs = require("three");
+ var THREEx = {};
+ initializeDomEvents(THREEs, THREEx);
+
+var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
+
 
 const clock = new THREE.Clock()
 const tick = () =>
