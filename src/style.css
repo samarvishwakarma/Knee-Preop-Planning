@@ -110,7 +110,7 @@ button{
 }
 
 .container button{
-    animation: opacity 3s;
+    animation: opacity 2s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
 }
