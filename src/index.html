@@ -15,16 +15,35 @@
         <h1 class="hero">WHEEL<button class="btn">O</button>S</h1>
         <div class="link"><a href="#cust">SCROLL DOWN</a></div>
     </div>
-    <script>
-        
-      </script>
-    <div class="container1" > 
-        <h2> </h2>
-        <p>Customize Wheels</p>
-        <canvas class="webgl" id="cust"></canvas>
-        
+    <div class="progress-bar-container">
+        <label for="progress-bar">Loading...</label>
+        <progress id ="progress-bar" value="0" max="100"></progress>
     </div>
-    
+    <div class="container1" id="cust">
+        <a class="customize" href="#popup1">Customize Wheels</a>
+        <canvas class="webgl" ></canvas>
+    </div>
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <h2>WELCOME</h2>
+            <a class="close" href="#cust">&times;</a>
+            <br><br>
+            <div class="content">
+                <p> Welcome to Wheelos Customization.</p>
+                <br>
+                Here's a quick guide on how to use the page's interactive features:
+                <br><br>
+                Click and hold the left mouse button to pan around.
+                <br>
+                Use the scroll wheel to zoom in and out.
+                <br><br>
+                Use Q/W or Click on tire to change the tire texture.
+                <br>
+                Click on Car to Open the Control.  
+                <br><br>       
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

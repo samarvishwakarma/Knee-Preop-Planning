@@ -76,23 +76,6 @@ body
     background-position: center;
 }
 
-.link {
-    mix-blend-mode: overlay;
-    animation: bounce 0.5s;
-    animation-direction: alternate;
-    animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
-    animation-iteration-count: infinite;
-}
-
-@keyframes bounce {
-    from {
-        transform: translate3d(0, -1vh, 0);
-    }
-    to {
-        transform: translate3d(0, 1vh, 0);
-    }
-}
-
 .dark-mode {
     background-image: url(/static/bgdark_Copy.png);
     color: white;
@@ -157,8 +140,10 @@ h2
     color: white;
 }
 
-p
+.container1 a
 {
+    position: absolute;
+    top: 180%;
     font-size: 100%;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.507);
@@ -167,11 +152,109 @@ p
 
 #gui { 
     opacity: 10%;
+    top: 150%;
  }
 
 #gui:hover{
     opacity: 100%;
 }
+
+.progress-bar-container {
+    position: absolute;
+    left: 50%;
+    top: 150%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#progress-bar {
+    width: 30%;
+    margin-top: 0.5%;
+    height: 2%;
+}
+
+label {
+    color: white;
+    font-size: 2rem;
+}
+
+.customize {
+    font-size: 1em;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+  .customize:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  
+  @media screen and (max-width: 700px){
+    .box{
+      width: 70%;
+    }
+    .popup{
+      width: 70%;
+    }
+  }
+
 /* section
 {
     height:100vh;

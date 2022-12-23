@@ -10,6 +10,7 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 // Debug
 const gui = new dat.GUI()
 gui.domElement.id = 'gui';
+gui.close();
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -43,13 +44,29 @@ if(! localStorage.getItem("carcolor_b") ) {
 }
 else ;
 
+//loading manager
+const loadingManager = new THREE.LoadingManager();
+
+const progressBar = document.getElementById("progress-bar");
+ 
+loadingManager.onProgress = function(url, loaded, total) {
+    progressBar.value = (loaded / total) * 100;
+}
+
+const progressBarContainer = document.querySelector('.progress-bar-container');
+
+loadingManager.onLoad = function() {
+    progressBarContainer.style.display = 'none';
+}
+
+
 // Objects
 var planemap;
 const textureLoader = new THREE.TextureLoader();
 planemap = textureLoader.load(`Texture/${localStorage.getItem("tireNumber")}.png`);
 
 let model,plane;
-const loader = new GLTFLoader();
+const loader = new GLTFLoader(loadingManager);
 loader.load('/mercedes.gltf',(gltf)=>{
     gltf.scene.position.z=0
     gltf.scene.position.y=0
@@ -90,13 +107,19 @@ loader.load('/mercedes.gltf',(gltf)=>{
         model.children[0].material.emissive.r = 0.1;
         model.children[0].material.emissive.g = 0.1;
         model.children[0].material.emissiveIntensity = 0.5;
+        document.body.style.cursor = "pointer";
     }
     function tirechange3() {
         model.children[0].material.emissive.r = 0;
         model.children[0].material.emissive.g = 0;
+        document.body.style.cursor = "default";
     }
 
     //car color
+    domEvents.addEventListener(model.children[1], 'click', opentab)
+    function opentab() {
+        gui.open();
+    }
     model.children[1].children[0].material.color.r = localStorage.getItem("carcolor_r");
     model.children[1].children[0].material.color.g = localStorage.getItem("carcolor_g");
     model.children[1].children[0].material.color.b = localStorage.getItem("carcolor_b");
@@ -104,7 +127,7 @@ loader.load('/mercedes.gltf',(gltf)=>{
     const carcolor = {
         Color : 0x00000
     }
-    console.log(model.children[1].children[0].material)
+    // console.log(model.children[1].children[0].material)
     gui.addColor(carcolor,'Color')
             .onChange(() => {
                 model.children[1].children[0].material.color.set(carcolor.Color)
@@ -273,7 +296,7 @@ window.addEventListener('resize', () =>
 
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio*0.6, 2))
 })
 
 
@@ -299,11 +322,12 @@ controls.maxPolarAngle = 1.4
  */
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    alpha:true
+    alpha:true,
+    antialias : true
 })
 
 renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.setPixelRatio(Math.min(window.devicePixelRatio*0.6, 2))
 renderer.shadowMap.enabled = true;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.8;
