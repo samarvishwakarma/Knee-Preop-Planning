@@ -9,7 +9,7 @@ html,
 body
 {
     height: 100vh;
-    font-family: 'Gotham';
+    font-family: 'Raleway', sans-serif;
     background: rgb(0, 0, 0);
     max-width:100%;
 }
@@ -56,7 +56,7 @@ button{
     border: 1px solid rgba(255, 255, 255, 0.5);
     text-decoration: none;
     mix-blend-mode: overlay;
-    font-family: 'Gotham';
+    font-family: 'Raleway', sans-serif;
     mix-blend-mode:overlay;
     text-decoration: none;
     background: none;
