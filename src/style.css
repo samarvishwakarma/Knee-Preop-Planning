@@ -31,56 +31,6 @@ body
     height: 100%;
 } */
 
-.navbar
-{
-    position: fixed;
-    width: 100vw;
-    display: flex;
-    background: #e7e7e71a;
-     backdrop-filter: blur(10px);
-}
-
-.nav
-{
-    padding: 5px;
-}
-
-.nav a
-{
-    font-size: 2rem;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    text-decoration: none;
-    mix-blend-mode: overlay;
-}
-
-.nav-dark {
-    background: #40404013;
-}
-
-.nav-dark p{
-    color: rgb(61, 61, 61);
-    border: 1px solid rgb(61, 61, 61);
-}
-
-.container
-{
-    height: 100%;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    backdrop-filter: blur(10px); 
-    background-image: url(/static/bglight_Copy.png);
-    background-size: cover;
-    background-position: center;
-}
-
-.dark-mode {
-    background-image: url(/static/bgdark_Copy.png);
-    color: white;
-}
-
 .container1
 {
     height: 100%;
@@ -91,17 +41,22 @@ body
 
 h1
 {
-    font-size: 8vw;
+    font-size: 2rem;
     text-transform: uppercase;
-    color: black;
-    mix-blend-mode:overlay ;
-    border: 1px solid black;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    mix-blend-mode: overlay;
 }
 
 button{
-    font-size: 8vw;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    mix-blend-mode: overlay;
     font-family: 'Gotham';
-    color: black;
     mix-blend-mode:overlay;
     text-decoration: none;
     background: none;
@@ -143,16 +98,32 @@ h2
 .container1 a
 {
     position: absolute;
-    top: 180%;
     font-size: 100%;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.507);
+    border-radius: 10%;
+}
 
+.container1 ul {
+    position: absolute;
+    top: 30%;
+    left: 5%;    
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.507);
+    list-style-type: none;
+}
+
+.container1 li {
+    margin: 0 0 1vw 0;
+}
+
+li label {
+    font-size: 1vw;
 }
 
 #gui { 
     opacity: 10%;
-    top: 150%;
+    /* top: 150%; */
  }
 
 #gui:hover{
@@ -162,7 +133,7 @@ h2
 .progress-bar-container {
     position: absolute;
     left: 50%;
-    top: 150%;
+    top: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
@@ -184,7 +155,102 @@ label {
     font-size: 2rem;
 }
 
+.update, .minus, .fminus {
+    font-size: 1em;
+    top: 80%;
+    left: 5%; 
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+  .update:hover, .minus:hover, .fminus:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+.add, .fadd {
+    font-size: 1em;
+    top: 80%;
+    left: 15%; 
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+  .add:hover, .fadd:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .add, .minus {
+    top: 25%;
+  }
+
+  .fadd, .fminus {
+    top: 50%;
+  }
+
+  .radd {
+    position: fixed;
+    width: 5%;
+    top: 75%;
+    left: 7.5%;
+    font-size: 1em;
+    background-color:#404040;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #404040;
+    text-align: center;
+    padding: 10px;
+  }
+  .radd:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+.varustext, .varusnum {
+  position: fixed;
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.5);
+  top: 20%;
+  left: 7.5%;
+  text-align:justify;
+}
+.varusnum {
+  top: 26%;
+  left: 10%;
+}
+
+.flexiontext, .flexionnum {
+  position: fixed;
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.5);
+  top: 45%;
+  left: 7.5%;
+  text-align: center;
+}
+.flexionnum {
+  top: 51%;
+  left: 10%;
+}
+
+.resecttext {
+  position: fixed;
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.5);
+  top: 70%;
+  left: 7.5%;
+  text-align: center;
+}
+
 .customize {
+    top: 80%;
+    right: 10%;
     font-size: 1em;
     padding: 10px;
     color: rgba(255, 255, 255, 0.5);
@@ -217,6 +283,7 @@ label {
   .popup {
     margin: 70px auto;
     padding: 20px;
+    left: 25%;
     background: rgba(255, 255, 255, 0.7);
     width: 30%;
     position: relative;
@@ -228,6 +295,12 @@ label {
     color: #333;
     font-family: Tahoma, Arial, sans-serif;
   }
+
+  .content label {
+    font-size: 1em;
+    color: #333;
+  }
+
   .popup .close {
     position: absolute;
     top: 20px;
@@ -248,10 +321,10 @@ label {
   
   @media screen and (max-width: 700px){
     .box{
-      width: 70%;
+      width: 30%;
     }
     .popup{
-      width: 70%;
+      width: 30%;
     }
   }
 
@@ -259,3 +332,24 @@ label {
 {
     height:100vh;
 } */
+
+.toolkit {
+    background-color: rgba(0, 0, 0, 0.308);
+    color: white;
+    padding: 1vw;
+    position: relative;
+    opacity: 0;
+    transition-duration: 0.2s;
+    transition-property: opacity, transform;
+    border-radius: 5%;
+}
+
+.hide {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0px);
+}
