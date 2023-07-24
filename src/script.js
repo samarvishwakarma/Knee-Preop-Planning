@@ -107,8 +107,6 @@ document.body.appendChild(labelRenderer.domElement);
 
 
 ////////////////////////hdri///////////////////////////////////////////////////
-
-const forest = new RGBELoader().load('/forest.hdr');
 const night = new RGBELoader().load('/night.hdr');
 
 hdri(night);
@@ -153,44 +151,28 @@ loader.load('/Right_Tibia.gltf',(gltf)=>{
 //
 const mousePos = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
+var intersectPoint;
+const planeNormal = new THREE.Vector3();
+
+setTimeout(function(){
+    window.addEventListener('mousemove', function(e){
+    mousePos.x = (e.clientX / this.window.innerWidth) * 2 - 1;
+    mousePos.y = -(e.clientY / this.window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(mousePos, camera);
+    intersectPoint = raycaster.intersectObject(model,true);
+})},2000);
 
 
 //////////////////////////////////Landmarks//////////////////////////////
-const v3Array = [
-    [-0.5884076131516434,7.218596528332681,0.9296679705331155],
-    [-0.8257240469187337,11.488070949663628,0.8981259525823955],
-    [-0.36373064156209345,7.297904806383609,1.1309564638565712],
-    [-0.8400305018915998,7.29899141054982,1.1605612533088303],
-    [-0.32559406578279304,7.201760188130875,0.6218889650743284],
-    [-0.8783003800189128,7.20635866327314,0.6528496318591069],
-    [-0.37563819270163284,7.176406328263145,1.0731399809853612],
-    [-0.7757836059066786,7.159961993283844,1.0845653890558902]
-];
 
-for (let index = 0; index < v3Array.length; index++) {
-    
-    let string = JSON.stringify(v3Array[index])
-    if(! localStorage.getItem(`mark${index}`) ) {
-        localStorage.setItem(`mark${index}`, string);
-    }
-}
-
-const geometry = new THREE.SphereGeometry(0.02, 6, 6); 
+const geometry = new THREE.SphereGeometry(0.05, 6, 6); 
 const sphere = []
 
 const group = new THREE.Group();
 
-for (let index = 0; index < v3Array.length; index++) {
+for (let index = 0; index < 8; index++) {
     const material = new THREE.MeshStandardMaterial ( { color: Math.random()*0xffffff } ); 
     sphere.push(new THREE.Mesh( geometry, material ));
-    sphere[index].name = `sphere${index}`
-    group.add( sphere[index] );
-    let retString = localStorage.getItem(`mark${index}`)
-    let retArray = JSON.parse(retString);
-    sphere[index].position.x = retArray[0]
-    sphere[index].position.y = retArray[1];
-    sphere[index].position.z = retArray[2];
-    sphere[index].visible = false;
 }
 scene.add(group)
 
@@ -215,22 +197,34 @@ document.getElementById('popup1').addEventListener('click', function(){
 })
 
 var i = -1;
-for (let index = 0; index < v3Array.length; index++) {
+for (let index = 0; index < 8; index++) {
     const element = document.getElementById(`mark${index+1}`);
     document.getElementById('list').addEventListener('click', positionChanger);
     function positionChanger(){
         if(element.checked == true) {
+            domEvents.addEventListener(model, 'click', function(e){
+                if(sphere[index].name == `sphere${index}`){
+                    translation.attach(sphere[index]);
+                }   
+                else {
+                sphere[index].position.copy(intersectPoint[0].point)
+                group.add(sphere[index]);
+                // scene.add(sphere[index]);
+                sphere[index].name = `sphere${index}`                
+                }
+            });
+            domEvents.addEventListener(sphere[index], 'mouseover', function(e){
+                document.body.style.cursor = "pointer";
+                sphere[index].material.emissive.r = 1;
+            })
+            domEvents.addEventListener(sphere[index], 'mouseout', function(e){
+                document.body.style.cursor = "";
+                sphere[index].material.emissive.r = 0;
+            })
             i = index;
-            axesHelper.position.x = sphere[index].position.x;
-            axesHelper.position.y = sphere[index].position.y;
-            axesHelper.position.z = sphere[index].position.z;
-            sphere[index].visible = true;
-            controls.target.x = sphere[index].position.x;
-            controls.target.y = sphere[index].position.y;
-            controls.target.z = sphere[index].position.z;
         }
         else {
-            sphere[index].visible = false;
+            translation.detach(sphere[index])
         }
     };
     
@@ -246,18 +240,10 @@ var ul = document.getElementById("list")
 function updateFunction(){
     update[0].hidden = true;
     ul.hidden = true;
-    for (let index = 0; index < v3Array.length; index++) {
-        var position = []
-        position.push(sphere[index].position.x)
-        position.push(sphere[index].position.y)
-        position.push(sphere[index].position.z)
-        sphere[index].visible = true;
-        let string = JSON.stringify(position)
-        localStorage.setItem(`mark${index}`, string);
-    }
 
     axesHelper.visible = false;
     translation.detach(axesHelper);
+    
 
     model.material.color.set(0xA61C1C);
     model2.material.color.set(0x2EA690);
@@ -572,9 +558,9 @@ scene.add(cPointLabel);
 
 window.addEventListener('mousemove', function(e) {
     if(i!=-1){
-        sphere[i].position.x = axesHelper.position.x;
-        sphere[i].position.y = axesHelper.position.y;
-        sphere[i].position.z = axesHelper.position.z;
+        // sphere[i].position.x = axesHelper.position.x;
+        // sphere[i].position.y = axesHelper.position.y;
+        // sphere[i].position.z = axesHelper.position.z;
     }
     else;
     
