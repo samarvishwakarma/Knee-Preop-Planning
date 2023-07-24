@@ -5,7 +5,7 @@
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack serve --config ./bundler/webpack.dev.js"
   },
-  "engines" : { 
+   "engines" : { 
     "node" : "16.9.0"
   },
   "dependencies": {
